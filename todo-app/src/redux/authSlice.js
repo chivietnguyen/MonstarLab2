@@ -1,9 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { startTransition } from "react";
 
 export const authSlice = createSlice({
 	name: "authentication",
 	initialState: {
 		register: {
+			error: false,
+			success: false,
+		},
+		login: {
+			currentUser: null,
 			error: false,
 			success: false,
 		},
@@ -17,11 +23,19 @@ export const authSlice = createSlice({
 			state.register.error = true;
 			state.register.success = false;
 		},
+
+		loginSuccess: (state, action) => {
+			state.login.currentUser = action.payload;
+			state.login.success = true;
+			state.login.error = false;
+		},
+		loginFailed: (state) => {
+			state.login.success = false;
+			state.login.error = true;
+		},
 	},
 });
 
-console.log(authSlice.actions);
-export const { registerSuccess, registerFailed } = authSlice.actions;
-console.log(registerSuccess);
-console.log(registerFailed);
+export const { registerSuccess, registerFailed, loginSuccess, loginFailed } =
+	authSlice.actions;
 export default authSlice.reducer;
