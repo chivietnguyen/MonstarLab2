@@ -6,6 +6,7 @@ export default function Navbar() {
 	return (
 		<div className={styles.navbar}>
 			{console.log("???")}
+			{console.log("Nguyễn Chí Việt")}
 			<div className={styles.user}>
 				<div className={styles.userAvatar}>
 					<img
