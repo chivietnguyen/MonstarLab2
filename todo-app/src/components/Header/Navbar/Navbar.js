@@ -15,6 +15,7 @@ export default function Navbar() {
 					/>
 				</div>
 				<p className={styles.username}>Chisviet123</p>
+				<h1>Nguyễn Chí Việt</h1>
 
 				<div className={styles.options}>
 					<div className={styles.optionContainer}>
