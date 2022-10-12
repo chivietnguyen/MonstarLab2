@@ -5,6 +5,7 @@ import styles from "./Navbar.module.css";
 export default function Navbar() {
 	return (
 		<div className={styles.navbar}>
+			console.log("Nguyễn Chí Việt")
 			<div className={styles.user}>
 				<div className={styles.userAvatar}>
 					<img
