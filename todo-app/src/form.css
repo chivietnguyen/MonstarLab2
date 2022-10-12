@@ -16,7 +16,7 @@
 }
 
 .input {
-	width: 100%;
+	width: -webkit-fill-available;
 	padding: 15px 20px;
 	border-radius: 8px;
 	border: 1px solid var(--success-color);
