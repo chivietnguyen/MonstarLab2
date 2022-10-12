@@ -5,8 +5,6 @@ import styles from "./Navbar.module.css";
 export default function Navbar() {
 	return (
 		<div className={styles.navbar}>
-			{console.log("???")}
-			{console.log("Nguyễn Chí Việt")}
 			<div className={styles.user}>
 				<div className={styles.userAvatar}>
 					<img
@@ -16,7 +14,6 @@ export default function Navbar() {
 					/>
 				</div>
 				<p className={styles.username}>Chisviet123</p>
-				<h1>Nguyễn Chí Việt</h1>
 
 				<div className={styles.options}>
 					<div className={styles.optionContainer}>
