@@ -1,8 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { LOGIN_PAGE } from "../../../path/path";
 
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
+	const navigate = useNavigate();
+
+	const handleLogout = () => {
+		localStorage.clear();
+		navigate(LOGIN_PAGE);
+	};
+
 	return (
 		<div className={styles.navbar}>
 			<div className={styles.user}>
@@ -39,7 +48,12 @@ export default function Navbar() {
 				</div>
 			</div>
 
-			<button className={`button ${styles.buttonLogout}`}>Logout</button>
+			<button
+				onClick={handleLogout}
+				className={`button ${styles.buttonLogout}`}
+			>
+				Logout
+			</button>
 		</div>
 	);
 }
