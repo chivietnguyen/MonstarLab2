@@ -4,6 +4,7 @@ import {
 	AUTH_LOGIN_URL,
 	LOGIN_PAGE,
 	TODO_PATH,
+	getUserUrlWithId,
 } from "../path/path";
 import {
 	registerSuccess,
@@ -11,6 +12,7 @@ import {
 	loginSuccess,
 	loginFailed,
 } from "./authSlice";
+import { deleteAccountFailed, deleteAccountSuccess } from "./userSlice";
 
 export const registerUser = async (user, dispatch, navigate, setErrMsg) => {
 	try {
@@ -35,5 +37,18 @@ export const loginUser = async (user, dispatch, navigate, setErrMsg) => {
 	} catch (err) {
 		dispatch(loginFailed());
 		setErrMsg(err.response.data.error.message);
+	}
+};
+
+export const deleteUser = async (userId, dispatch, navigate) => {
+	try {
+		await api.delete(getUserUrlWithId(userId));
+
+		localStorage.clear();
+		dispatch(deleteAccountSuccess);
+		navigate(LOGIN_PAGE);
+	} catch (err) {
+		dispatch(deleteAccountFailed);
+		alert(err.response.data.error.message);
 	}
 };
