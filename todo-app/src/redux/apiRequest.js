@@ -12,7 +12,12 @@ import {
 	loginSuccess,
 	loginFailed,
 } from "./authSlice";
-import { deleteAccountFailed, deleteAccountSuccess } from "./userSlice";
+import {
+	deleteAccountFailed,
+	deleteAccountSuccess,
+	editProfileFailed,
+	editProfileSuccess,
+} from "./userSlice";
 
 export const registerUser = async (user, dispatch, navigate, setErrMsg) => {
 	try {
@@ -50,5 +55,26 @@ export const deleteUser = async (userId, dispatch, navigate) => {
 	} catch (err) {
 		dispatch(deleteAccountFailed);
 		alert(err.response.data.error.message);
+	}
+};
+
+export const editUser = async (
+	userId,
+	payload,
+	dispatch,
+	navigate,
+	setErrMsg
+) => {
+	try {
+		await api.patch(getUserUrlWithId(userId), payload);
+
+		localStorage.clear();
+
+		dispatch(editProfileSuccess);
+		alert("Edit profile successfully!");
+		navigate(LOGIN_PAGE);
+	} catch (err) {
+		dispatch(editProfileFailed);
+		setErrMsg(err.response.data.error.message);
 	}
 };

@@ -2,9 +2,15 @@ import React, { useState, createContext } from "react";
 import Header from "./components/Header/Header";
 import RegisterForm from "./components/Register/Register";
 import LoginForm from "./components/Login/Login";
+import EditProfileForm from "./components/EditProfile/EditProfileForm";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { LOGIN_PAGE, REGISTER_PAGE, TODO_PATH } from "./path/path";
+import {
+	EDIT_PROFILE_PAGE,
+	LOGIN_PAGE,
+	REGISTER_PAGE,
+	TODO_PATH,
+} from "./path/path";
 
 import "./normalize.css";
 import "./form.css";
@@ -30,6 +36,7 @@ function App() {
 							)
 						}
 					/>
+					<Route path={EDIT_PROFILE_PAGE} element={<EditProfileForm />} />
 					<Route path={LOGIN_PAGE} element={<LoginForm />} />
 					<Route path={REGISTER_PAGE} element={<RegisterForm />} />
 				</Routes>

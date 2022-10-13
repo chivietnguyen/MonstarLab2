@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { UserInfoContext } from "../../../App";
-import { LOGIN_PAGE } from "../../../path/path";
+import { EDIT_PROFILE_PAGE, LOGIN_PAGE } from "../../../path/path";
 import { deleteUser } from "../../../redux/apiRequest";
 
 import styles from "./Navbar.module.css";
@@ -10,9 +10,6 @@ import styles from "./Navbar.module.css";
 export default function Navbar() {
 	const [userInfo, setUserInfo] = useContext(UserInfoContext);
 	setUserInfo(localStorage.getItem("user"));
-
-	const username = JSON.parse(localStorage.getItem("user"))?.username;
-	const userId = JSON.parse(localStorage.getItem("user"))?.id;
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -23,7 +20,14 @@ export default function Navbar() {
 	};
 
 	const handleDeleteAccount = () => {
+		const username = JSON.parse(localStorage.getItem("user"))?.username;
+		const userId = JSON.parse(localStorage.getItem("user"))?.id;
+
 		deleteUser(userId, dispatch, navigate);
+	};
+
+	const handleNavigateToEditProfile = () => {
+		navigate(EDIT_PROFILE_PAGE);
 	};
 
 	return (
@@ -43,6 +47,7 @@ export default function Navbar() {
 						<div className={styles.options}>
 							<div className={styles.optionContainer}>
 								<button
+									onClick={handleNavigateToEditProfile}
 									className={`button ${styles.buttonOption} ${styles.buttonEditProfile}`}
 								>
 									<i className="fa-solid fa-user-pen"></i>
