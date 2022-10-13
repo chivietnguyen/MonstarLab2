@@ -29,12 +29,11 @@ export const loginUser = async (user, dispatch, navigate, setErrMsg) => {
 		const response = await api.post(AUTH_LOGIN_URL, user);
 		const userInfo = response.data.data;
 
-		// Save userInfo to localStorage
 		localStorage.setItem("user", JSON.stringify(userInfo));
-
 		dispatch(loginSuccess(userInfo));
 		navigate(TODO_PATH);
 	} catch (err) {
+		dispatch(loginFailed());
 		setErrMsg(err.response.data.error.message);
 	}
 };

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { startTransition } from "react";
 
 export const authSlice = createSlice({
 	name: "authentication",
@@ -39,3 +38,5 @@ export const authSlice = createSlice({
 export const { registerSuccess, registerFailed, loginSuccess, loginFailed } =
 	authSlice.actions;
 export default authSlice.reducer;
+
+console.log(authSlice.reducer);
