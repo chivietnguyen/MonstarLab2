@@ -11,9 +11,6 @@ export default function Navbar() {
 	const [userInfo, setUserInfo] = useContext(UserInfoContext);
 	setUserInfo(localStorage.getItem("user"));
 
-	const username = JSON.parse(localStorage.getItem("user"))?.username;
-	const userId = JSON.parse(localStorage.getItem("user"))?.id;
-
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -23,6 +20,9 @@ export default function Navbar() {
 	};
 
 	const handleDeleteAccount = () => {
+		const username = JSON.parse(localStorage.getItem("user"))?.username;
+		const userId = JSON.parse(localStorage.getItem("user"))?.id;
+
 		deleteUser(userId, dispatch, navigate);
 	};
 
