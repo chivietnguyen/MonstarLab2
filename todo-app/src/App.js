@@ -14,7 +14,9 @@ import {
 
 import "./normalize.css";
 import "./form.css";
+import "./category.css";
 import "./App.css";
+import Todolist from "./components/Todolist/Todolist";
 
 export const UserInfoContext = createContext();
 
@@ -36,9 +38,10 @@ function App() {
 							)
 						}
 					/>
-					<Route path={EDIT_PROFILE_PAGE} element={<EditProfileForm />} />
 					<Route path={LOGIN_PAGE} element={<LoginForm />} />
 					<Route path={REGISTER_PAGE} element={<RegisterForm />} />
+					<Route path={EDIT_PROFILE_PAGE} element={<EditProfileForm />} />
+					<Route path={TODO_PATH} element={<Todolist />} />
 				</Routes>
 			</UserInfoContext.Provider>
 		</div>
