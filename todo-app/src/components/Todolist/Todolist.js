@@ -5,15 +5,19 @@ import TodoFooter from "./TodoFooter/TodoFooter";
 import AddTodoPopUp from "./AddTodoPopUp/AddTodoPopUp";
 
 import styles from "./Todolist.module.css";
+import { useSelector } from "react-redux";
 
 export default function Todolist() {
+	const isShowAddTodoPopUp = useSelector(
+		(state) => state.todos.showAddTodoPopUp.display
+	);
+
 	return (
 		<div className={styles.container}>
 			<TodoHeader />
 
-			<AddTodoPopUp />
+			{isShowAddTodoPopUp && <AddTodoPopUp />}
 			<TodoBody />
-
 			<TodoFooter />
 		</div>
 	);

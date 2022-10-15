@@ -1,9 +1,17 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { showAddTodoPopUp } from "../../../redux/todosSlice";
 import CategoryInTodoHeader from "./CategoryInTodoHeader";
 
 import styles from "./TodoHeader.module.css";
 
 export default function TodoHeader() {
+	const dispatch = useDispatch();
+
+	const handleShowAddTodoPopUp = () => {
+		dispatch(showAddTodoPopUp());
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -17,7 +25,10 @@ export default function TodoHeader() {
 				</div>
 
 				<div>
-					<button className={`button ${styles.buttonAdd}`}>
+					<button
+						className={`button ${styles.buttonAdd}`}
+						onClick={handleShowAddTodoPopUp}
+					>
 						Add Tasks <i className="fa-solid fa-plus"></i>
 					</button>
 				</div>

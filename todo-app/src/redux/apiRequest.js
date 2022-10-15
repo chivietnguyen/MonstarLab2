@@ -5,6 +5,7 @@ import {
 	LOGIN_PAGE,
 	TODO_PATH,
 	getUserUrlWithId,
+	API_TASKS_URL,
 } from "../path/path";
 import {
 	registerSuccess,
@@ -12,6 +13,7 @@ import {
 	loginSuccess,
 	loginFailed,
 } from "./authSlice";
+import { addTodoSuccess } from "./todosSlice";
 import {
 	deleteAccountFailed,
 	deleteAccountSuccess,
@@ -50,10 +52,10 @@ export const deleteUser = async (userId, dispatch, navigate) => {
 		await api.delete(getUserUrlWithId(userId));
 
 		localStorage.clear();
-		dispatch(deleteAccountSuccess);
+		dispatch(deleteAccountSuccess());
 		navigate(LOGIN_PAGE);
 	} catch (err) {
-		dispatch(deleteAccountFailed);
+		dispatch(deleteAccountFailed());
 		alert(err.response.data.error.message);
 	}
 };
@@ -70,11 +72,21 @@ export const editUser = async (
 
 		localStorage.clear();
 
-		dispatch(editProfileSuccess);
+		dispatch(editProfileSuccess());
 		alert("Edit profile successfully!");
 		navigate(LOGIN_PAGE);
 	} catch (err) {
-		dispatch(editProfileFailed);
+		dispatch(editProfileFailed());
 		setErrMsg(err.response.data.error.message);
+	}
+};
+
+export const addTodo = async (todoInfo, dispatch) => {
+	try {
+		await api.post(API_TASKS_URL, todoInfo);
+
+		dispatch(addTodoSuccess(todoInfo));
+	} catch (err) {
+		alert(err);
 	}
 };
