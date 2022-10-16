@@ -16,7 +16,7 @@
 
 .todoCard {
 	background-color: var(--list-item-background-color);
-	width: 280px;
+	width: 250px;
 	max-width: 300px;
 	padding: 10px;
 	border-radius: 20px;
