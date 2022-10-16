@@ -1,7 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { api } from "../api/axios";
+import { API_TASKS_URL } from "../path/path";
+
+export const getTodos = createAsyncThunk("todos/getTodos", async () => {
+	return api.get(API_TASKS_URL).then((res) => res.data.data);
+});
 
 export const todosSlice = createSlice({
-	name: "todo",
+	name: "todos",
 	initialState: {
 		showAddTodoPopUp: {
 			display: false,
@@ -9,6 +15,10 @@ export const todosSlice = createSlice({
 		addTodo: {
 			todoInfo: {},
 			success: false,
+		},
+		todolist: {
+			todos: [],
+			status: null,
 		},
 	},
 	reducers: {
@@ -24,6 +34,18 @@ export const todosSlice = createSlice({
 		},
 		addTodoFailed: (state) => {
 			state.addTodo.success = false;
+		},
+	},
+	extraReducers: {
+		[getTodos.pending]: (state) => {
+			state.todolist.status = "loading";
+		},
+		[getTodos.fulfilled]: (state, action) => {
+			state.todolist.todos = action.payload;
+			state.todolist.status = "success";
+		},
+		[getTodos.rejected]: (state) => {
+			state.todolist.status = "failed";
 		},
 	},
 });
