@@ -28,7 +28,9 @@ export default function TodoBody() {
 						<div className={styles.cardBody}>
 							<div className={styles.categoryField}>
 								<div className={styles.categoryContainer}>
-									<div className={styles.category}>Life</div>
+									{todo.categories.map((category) => (
+										<div className={styles.category}>{category.name}</div>
+									))}
 								</div>
 							</div>
 
