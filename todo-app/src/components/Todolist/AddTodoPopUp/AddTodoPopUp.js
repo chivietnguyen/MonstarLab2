@@ -4,9 +4,8 @@ import CategoryInAddTodoPopUp from "./CategoryInAddTodoPopUp";
 
 import styles from "./AddTodoPopUp.module.css";
 import { useDispatch } from "react-redux";
-import { hideAddTodoPopUp } from "../../../redux/todosSlice";
+import { addTodo, getTodos, hideAddTodoPopUp } from "../../../redux/todosSlice";
 import { getCategoryIdsArr } from "../../../helper/helper";
-import { addTodo } from "../../../redux/apiRequest";
 
 export const CategoriesContext = createContext();
 
@@ -19,14 +18,21 @@ export default function AddTodoPopUp() {
 		dispatch(hideAddTodoPopUp());
 	};
 
-	const handleAddTask = (e) => {
+	const handleAddTask = async (e) => {
 		e.preventDefault();
-		const payload = {
-			title,
-			categoryIds: getCategoryIdsArr(categoriesSelected),
-		};
 
-		addTodo(payload, dispatch);
+		try {
+			const payload = {
+				title,
+				categoryIds: getCategoryIdsArr(categoriesSelected),
+			};
+
+			await dispatch(addTodo(payload));
+			dispatch(getTodos());
+			dispatch(hideAddTodoPopUp());
+		} catch (err) {
+			alert(err);
+		}
 	};
 
 	return (

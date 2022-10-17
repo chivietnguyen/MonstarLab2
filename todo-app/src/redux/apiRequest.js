@@ -80,13 +80,3 @@ export const editUser = async (
 		setErrMsg(err.response.data.error.message);
 	}
 };
-
-export const addTodo = async (todoInfo, dispatch) => {
-	try {
-		await api.post(API_TASKS_URL, todoInfo);
-
-		dispatch(addTodoSuccess(todoInfo));
-	} catch (err) {
-		alert(err);
-	}
-};

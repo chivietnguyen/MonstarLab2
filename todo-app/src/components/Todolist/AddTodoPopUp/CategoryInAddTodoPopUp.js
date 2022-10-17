@@ -16,7 +16,7 @@ export default function CategoryInAddTodoPopUp() {
 
 	useEffect(() => {
 		dispatch(getCategories());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<div className="category">

@@ -1,20 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTodos } from "../../../redux/todosSlice";
+import { deleteTodo, getTodos } from "../../../redux/todosSlice";
 
 import styles from "./TodoBody.module.css";
 
 export default function TodoBody() {
 	const todos = useSelector((state) => state.todos.todolist.todos);
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getTodos());
 	}, [dispatch]);
 
-	console.log(todos);
-
+	const handleDeleteTask = async (id) => {
+		try {
+			await dispatch(deleteTodo(id));
+			dispatch(getTodos());
+		} catch (err) {
+			alert(err);
+		}
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.listItems}>
@@ -29,7 +34,9 @@ export default function TodoBody() {
 							<div className={styles.categoryField}>
 								<div className={styles.categoryContainer}>
 									{todo.categories.map((category) => (
-										<div className={styles.category}>{category.name}</div>
+										<div key={category.id} className={styles.category}>
+											{category.name}
+										</div>
 									))}
 								</div>
 							</div>
@@ -40,12 +47,11 @@ export default function TodoBody() {
 							</div>
 
 							<div className={styles.cardFooter}>
-								<i className="icon--trash fa-solid fa-trash-can"></i>
-								<input
-									className={styles.cardCheckbox}
-									type="checkbox"
-									checked={todo.status === "COMPLETED" ? true : false}
-								/>
+								<i
+									className="icon--trash fa-solid fa-trash-can"
+									onClick={() => handleDeleteTask(todo.id)}
+								></i>
+								<input className={styles.cardCheckbox} type="checkbox" />
 							</div>
 						</div>
 					</div>
